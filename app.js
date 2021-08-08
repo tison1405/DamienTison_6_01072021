@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
+const path = require('path');
 
 const app = express();
 
@@ -26,5 +27,6 @@ app.use(bodyParser.json());
 
 app.use('/api/sauces', saucesRoutes);
 app.use('/api/auth', userRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
  
 module.exports = app;
