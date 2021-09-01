@@ -40,8 +40,8 @@ app.post('/api/sauces/:id/like',(req, res, next) =>{
         thing.usersLiked.push(req.body.userId);
         thing.likes += 1;
         thing.save()
-      .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
-      .catch(error => res.status(400).json({ error }));
+        .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
+        .catch(error => res.status(400).json({ error }));
     }}
      if(req.body.like===-1){
        if(!thing.usersDisliked.includes(req.body.userId)){
@@ -54,7 +54,8 @@ app.post('/api/sauces/:id/like',(req, res, next) =>{
       if(req.body.like===0){
         for (let usersLiked of  thing.usersLiked){
           if (usersLiked === req.body.userId){
-            thing.like -= 1;
+            thing.likes -= 1;
+            thing.usersLiked.pull(req.body.userId);
             thing.save()
               .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
               .catch(error => res.status(400).json({ error }));
